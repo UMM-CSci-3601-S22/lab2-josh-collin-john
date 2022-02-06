@@ -24,4 +24,31 @@ public class TodoController {
     public TodoController(TodoDatabase database) {
         this.database = database;
     }
+
+    /**
+   * Get the single todo specified by the `id` parameter in the request.
+   *
+   * @param ctx a Javalin HTTP context
+   */
+  public void getTodo(Context ctx) {
+    String id = ctx.pathParam("id");
+    Todo todo = database.getTodo(id);
+    if (todo != null) {
+      ctx.json(todo);
+      ctx.status(HttpCode.OK);
+    } else {
+      throw new NotFoundResponse("No user with id " + id + " was found.");
+    }
+  }
+
+  /**
+   * Get a JSON response with a list of all the users in the "database".
+   *
+   * @param ctx a Javalin HTTP context
+   */
+  public void getTodos(Context ctx) {
+    Todo[] todos = database.listTodos(ctx.queryParamMap());
+    ctx.json(todos);
+  }
+
 }
