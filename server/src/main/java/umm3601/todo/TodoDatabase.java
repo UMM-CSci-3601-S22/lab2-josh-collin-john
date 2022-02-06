@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.javalin.http.BadRequestResponse;
+//import io.javalin.http.BadRequestResponse;
 
 /*
   Mock database class for todo objects, mirrors /user/UserDatabase.java
@@ -17,13 +17,13 @@ public class TodoDatabase {
 
   private Todo[] allTodos;
 
-  public TodoDatabase(String todoDatabaseFile) throws IOException{
+  public TodoDatabase(String todoDatabaseFile) throws IOException {
     InputStreamReader reader = new InputStreamReader(getClass().getResourceAsStream(todoDatabaseFile));
     ObjectMapper objectMapper = new ObjectMapper();
     allTodos = objectMapper.readValue(reader, Todo[].class);
   }
 
-  public int size(){
+  public int size() {
     return allTodos.length;
   }
 
@@ -49,34 +49,25 @@ public class TodoDatabase {
     Todo[] filteredTodos = allTodos;
 
     //Filter by Owner
-    if(queryParams.containsKey("owner")) {
+    if (queryParams.containsKey("owner")) {
       String targetOwner = queryParams.get("owner").get(0);
       filteredTodos = filterTodosByOwner(filteredTodos, targetOwner);
     }
 
     //filter by Category
-    if(queryParams.containsKey("category")) {
+    if (queryParams.containsKey("category")) {
       String targetCategory = queryParams.get("category").get(0);
       filteredTodos = filterTodosByCategory(filteredTodos, targetCategory);
     }
 
     //filter by body contents
-    if(queryParams.containsKey("contains")) {
+    if (queryParams.containsKey("contains")) {
       String targetBody = queryParams.get("contains").get(0);
       filteredTodos = filterTodosByBody(filteredTodos, targetBody);
     }
 
-    //filter by status
-    if(queryParams.containsKey("status")) {
-      String targetStatus = queryParams.get("status").get(0);
-      filteredTodos = filterTodosByStatus(filteredTodos, targetStatus);
-    }
-
     return filteredTodos;
   }
-
-
-
 
   public Todo[] filterTodosByOwner(Todo[] todos, String targetOwner) {
     return Arrays.stream(todos).filter(x -> x.owner.equals(targetOwner)).toArray(Todo[]::new);
@@ -88,17 +79,6 @@ public class TodoDatabase {
 
   public Todo[] filterTodosByBody(Todo[] todos, String targetBody) {
     return Arrays.stream(todos).filter(x -> x.body.contains(targetBody)).toArray(Todo[]::new);
-  }
-
-  public Todo[] filterTodosByStatus(Todo[] todos, String targetStatus) {
-    boolean realStatus;
-    if(targetStatus.equals("completed")) {
-      realStatus = true;
-    }
-    else {
-      realStatus = false;
-    }
-    return Arrays.stream(todos).filter(x -> x.status == realStatus).toArray(Todo[]::new);
   }
 
 }
