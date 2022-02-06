@@ -66,6 +66,18 @@ public class TodoDatabase {
       filteredTodos = filterTodosByBody(filteredTodos, targetBody);
     }
 
+    //filter by status
+    if (queryParams.containsKey("status")) {
+      String targetStatus = queryParams.get("status").get(0);
+      filteredTodos = filterTodosByStatus(filteredTodos, targetStatus);
+    }
+
+    //limit number of visible todos
+    if (queryParams.containsKey("limit")) {
+      Integer targetLimit = Integer.parseInt(queryParams.get("limit").get(0));
+      filteredTodos = LimitDisplayedTodos(filteredTodos, targetLimit);
+    }
+
     return filteredTodos;
   }
 
@@ -81,4 +93,18 @@ public class TodoDatabase {
     return Arrays.stream(todos).filter(x -> x.body.contains(targetBody)).toArray(Todo[]::new);
   }
 
+  public Todo[] filterTodosByStatus(Todo[] todos, String targetStatus) {
+    Boolean realStatus;
+    if ( targetStatus.equals("complete")) {
+      realStatus = true;
+    }
+    else {
+      realStatus = false;
+    }
+    return Arrays.stream(todos).filter(x -> x.status == realStatus).toArray(Todo[]::new);
+  }
+
+  public Todo[] LimitDisplayedTodos(Todo[] todos, Integer targetLimit) {
+    return Arrays.stream(todos).limit(targetLimit).toArray(Todo[]::new);
+  }
 }
