@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 public class FilterTodosByMultipleFilters {
 
   @Test
-  public void FilterByMultiple() throws IOException {
+  public void filterByMultiple() throws IOException {
 
     TodoDatabase db = new TodoDatabase("/todos.json");
     Map<String, List<String>> queryParams = new HashMap<>();

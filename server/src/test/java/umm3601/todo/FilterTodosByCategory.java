@@ -24,7 +24,7 @@ public class FilterTodosByCategory {
     TodoDatabase db = new TodoDatabase("/todos.json");
     Map<String, List<String>> queryParams = new HashMap<>();
 
-    queryParams.put("category",Arrays.asList(new String[] {"video games"}));
+    queryParams.put("category", Arrays.asList(new String[] {"video games"}));
     Todo[] categoryVideoGamesTodos = db.listTodos(queryParams);
     assertEquals(71, categoryVideoGamesTodos.length, "Incorrect number of todos with Category Video Games");
 

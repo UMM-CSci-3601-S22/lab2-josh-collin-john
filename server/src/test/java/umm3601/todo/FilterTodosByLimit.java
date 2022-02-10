@@ -24,9 +24,9 @@ public class FilterTodosByLimit {
     TodoDatabase db = new TodoDatabase("/todos.json");
     Map<String, List<String>> queryParams = new HashMap<>();
 
-    queryParams.put("limit",Arrays.asList(new String[] {"8"}));
-    Todo[] Limit8Todos = db.listTodos(queryParams);
-    assertEquals(8, Limit8Todos.length, "Incorrect number of todos displayed");
+    queryParams.put("limit", Arrays.asList(new String[] {"8"}));
+    Todo[] limit8Todos = db.listTodos(queryParams);
+    assertEquals(8, limit8Todos.length, "Incorrect number of todos displayed");
 
   }
 
