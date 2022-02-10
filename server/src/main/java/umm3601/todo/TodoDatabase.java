@@ -32,18 +32,18 @@ public class TodoDatabase {
    * Get the single user specified by the given ID. Return `null` if there is no
    * user with that ID.
    *
-   * @param id the ID of the desired user
-   * @return the user with the given ID, or null if there is no user with that ID
+   * @param id the ID of the desired todo
+   * @return the todo with the given ID, or null if there is no user with that ID
    */
   public Todo getTodo(String id) {
     return Arrays.stream(allTodos).filter(x -> x._id.equals(id)).findFirst().orElse(null);
   }
 
   /**
-   * Get an array of all the users satisfying the queries in the params.
+   * Get an array of all the Todos satisfying the queries in the params.
    *
    * @param queryParams map of key-value pairs for the query
-   * @return an array of all the users matching the given criteria
+   * @return an array of all the todos matching the given criteria
    */
   public Todo[] listTodos(Map<String, List<String>> queryParams) {
     Todo[] filteredTodos = allTodos;
@@ -75,7 +75,7 @@ public class TodoDatabase {
     //limit number of visible todos
     if (queryParams.containsKey("limit")) {
       Integer targetLimit = Integer.parseInt(queryParams.get("limit").get(0));
-      filteredTodos = LimitDisplayedTodos(filteredTodos, targetLimit);
+      filteredTodos = limitDisplayedTodos(filteredTodos, targetLimit);
     }
 
     return filteredTodos;
@@ -95,16 +95,15 @@ public class TodoDatabase {
 
   public Todo[] filterTodosByStatus(Todo[] todos, String targetStatus) {
     Boolean realStatus;
-    if ( targetStatus.equals("complete")) {
+    if (targetStatus.equals("complete")) {
       realStatus = true;
     }
-    else {
-      realStatus = false;
-    }
+    else realStatus = false;
+
     return Arrays.stream(todos).filter(x -> x.status == realStatus).toArray(Todo[]::new);
   }
 
-  public Todo[] LimitDisplayedTodos(Todo[] todos, Integer targetLimit) {
+  public Todo[] limitDisplayedTodos(Todo[] todos, Integer targetLimit) {
     return Arrays.stream(todos).limit(targetLimit).toArray(Todo[]::new);
   }
 }
