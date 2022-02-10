@@ -97,8 +97,9 @@ public class TodoDatabase {
     Boolean realStatus;
     if (targetStatus.equals("complete")) {
       realStatus = true;
+    } else {
+      realStatus = false;
     }
-    else realStatus = false;
 
     return Arrays.stream(todos).filter(x -> x.status == realStatus).toArray(Todo[]::new);
   }
