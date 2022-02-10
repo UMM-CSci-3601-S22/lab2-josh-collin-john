@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
   Tests getting todos by Limit.
 */
 
+@SuppressWarnings({ "MagicNumber" })
 public class FilterTodosByLimit {
 
   @Test

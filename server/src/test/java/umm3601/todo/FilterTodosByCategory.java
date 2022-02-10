@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
   Tests getting todos by category.
 */
 
+@SuppressWarnings({ "MagicNumber" })
 public class FilterTodosByCategory {
 
   @Test
@@ -24,8 +25,8 @@ public class FilterTodosByCategory {
     Map<String, List<String>> queryParams = new HashMap<>();
 
     queryParams.put("category",Arrays.asList(new String[] {"video games"}));
-    Todo[] CategoryVideoGamesTodos = db.listTodos(queryParams);
-    assertEquals(71, CategoryVideoGamesTodos.length, "Incorrect number of todos with Category Video Games");
+    Todo[] categoryVideoGamesTodos = db.listTodos(queryParams);
+    assertEquals(71, categoryVideoGamesTodos.length, "Incorrect number of todos with Category Video Games");
 
   }
 

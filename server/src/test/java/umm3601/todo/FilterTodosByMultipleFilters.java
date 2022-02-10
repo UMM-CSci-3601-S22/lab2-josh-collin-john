@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
   Tests getting todos by Limit.
 */
 
+@SuppressWarnings({ "MagicNumber" })
 public class FilterTodosByMultipleFilters {
 
   @Test
@@ -23,12 +24,12 @@ public class FilterTodosByMultipleFilters {
     TodoDatabase db = new TodoDatabase("/todos.json");
     Map<String, List<String>> queryParams = new HashMap<>();
 
-    queryParams.put("owner",Arrays.asList(new String[] {"Barry"}));
-    queryParams.put("category",Arrays.asList(new String[] {"video games"}));
-    queryParams.put("status",Arrays.asList(new String[] {"complete"}));
-    Todo[] MultipleFilterTodos = db.listTodos(queryParams);
+    queryParams.put("owner", Arrays.asList(new String[] {"Barry"}));
+    queryParams.put("category", Arrays.asList(new String[] {"video games"}));
+    queryParams.put("status", Arrays.asList(new String[] {"complete"}));
+    Todo[] multipleFilterTodos = db.listTodos(queryParams);
 
-    assertEquals(4, MultipleFilterTodos.length, "Incorrect number of todos displayed");
+    assertEquals(4, multipleFilterTodos.length, "Incorrect number of todos displayed");
 
   }
 

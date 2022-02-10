@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
   Tests getting todos by Status.
 */
 
+@SuppressWarnings({ "MagicNumber" })
 public class FilterTodosByStatus {
 
   @Test
@@ -23,7 +24,7 @@ public class FilterTodosByStatus {
     TodoDatabase db = new TodoDatabase("/todos.json");
     Map<String, List<String>> queryParams = new HashMap<>();
 
-    queryParams.put("status",Arrays.asList(new String[] {"incomplete"}));
+    queryParams.put("status", Arrays.asList(new String[] {"incomplete"}));
     Todo[] statusIncompleteTodos = db.listTodos(queryParams);
     assertEquals(157, statusIncompleteTodos.length, "Incorrect number of todos with status incomplete");
 

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
   Tests getting todos by Id.
 */
 
+@SuppressWarnings({ "MagicNumber" })
 public class FilterTodosById {
 
   @Test

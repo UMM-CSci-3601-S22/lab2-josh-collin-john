@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
   Tests getting todos by Limit.
 */
 
+@SuppressWarnings({ "MagicNumber" })
 public class ListAllTodos {
 
   @Test
@@ -22,8 +23,8 @@ public class ListAllTodos {
     TodoDatabase db = new TodoDatabase("/todos.json");
     Map<String, List<String>> queryParams = new HashMap<>();
 
-    Todo[] ListAllTodos = db.listTodos(queryParams);
-    assertEquals(300, ListAllTodos.length, "Incorrect number of todos displayed");
+    Todo[] listAllTodos = db.listTodos(queryParams);
+    assertEquals(300, listAllTodos.length, "Incorrect number of todos displayed");
 
   }
 

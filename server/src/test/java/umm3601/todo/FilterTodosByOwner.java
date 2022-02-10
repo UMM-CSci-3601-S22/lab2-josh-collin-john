@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
   Tests getting todos by Id.
 */
 
+@SuppressWarnings({ "MagicNumber" })
 public class FilterTodosByOwner {
 
   @Test
@@ -23,7 +24,7 @@ public class FilterTodosByOwner {
     TodoDatabase db = new TodoDatabase("/todos.json");
     Map<String, List<String>> queryParams = new HashMap<>();
 
-    queryParams.put("owner",Arrays.asList(new String[] {"Blanche"}));
+    queryParams.put("owner", Arrays.asList(new String[] {"Blanche"}));
     Todo[] ownerBlancheTodos = db.listTodos(queryParams);
     assertEquals(43, ownerBlancheTodos.length, "Incorrect number of todos with owner Blanche");
 
